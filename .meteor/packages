@@ -7,6 +7,6 @@ standard-app-packages
 autopublish
 insecure
 bootstrap-3
-accounts-ui-bootstrap-3
 accounts-password
 accounts-facebook
+accounts-ui-bootstrap-3-blaze
