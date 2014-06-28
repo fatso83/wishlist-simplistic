@@ -1,0 +1,22 @@
+client/                 # Client folder
+    compatibility/      # Libraries which create a global variable
+    config/             # Configuration files (on the client)
+    lib/                # Library files that get executed first
+    routes/             # All routes(*)
+    startup/            # Javascript files on Meteor.startup()
+    stylesheets         # LESS files
+    subscriptions/      # Collection subscriptions(*)
+    modules/            # Meant for components, such as form and more(*)
+    views/              # Contains all views(*)
+        common/         # General purpose html templates
+model/                  # Model files, for each Meteor.Collection(*)
+private/                # Private files
+public/                 # Public files
+server/                 # Server folder
+    fixtures/           # Meteor.Collection fixtures defined
+    lib/                # Server side library folder
+    publications/       # Collection publications(*)
+    startup/            # On server startup
+tests/                  # Test files, can be run with laika
+meteor-boilerplate      # Command line tool
+meteor-boilerplate.bat  # Command line tool for windows
