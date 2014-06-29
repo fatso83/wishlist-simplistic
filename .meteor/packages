@@ -7,7 +7,6 @@ standard-app-packages
 autopublish
 insecure
 bootstrap-3
-accounts-password
 accounts-facebook
 service-configuration
 accounts-persona
