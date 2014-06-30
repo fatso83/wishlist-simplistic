@@ -5,6 +5,10 @@
     </div>
 
     {{#if currentUser}}
+    Innlogget som {{userString}}
+    {{/if}}
+
+    {{#if currentUser}}
     <button id="logoutButton"
             class="btn btn-primary">Logg ut</button>
     {{/if}}

@@ -1,17 +1,3 @@
-Template.header.events({
-
-	'click #logoutButton' : function () {
-		Meteor.logout(function (err) {
-			if (err) {
-				console.error('error', arguments);
-			}
-			else {
-				console.log('logged out', arguments);
-			}
-		});
-	}
-});
-
 Template.login.events({
 
 	'click #loginPersona' : function () {

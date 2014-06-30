@@ -1,0 +1,11 @@
+<body>
+<script>
+
+    // extra functionality when running in an iframe
+    if(parent.alertsize) {
+        // notify the iframe's parent of its size to dynamically
+        // set the height of the iframe to the height of the wishlist
+        parent.alertsize(document.body.scrollHeight);
+    }
+</script>
+</body>
