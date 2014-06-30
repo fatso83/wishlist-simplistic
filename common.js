@@ -1,3 +1,7 @@
+getRandomVal = function(list) {
+	return list[Math.random() * list.length >> 0];
+};
+
 //not varing the definitions here -> ends up in the global scope
 checkJustOne = function(list) {
 	var count = list.count ? list.count() : list.length;

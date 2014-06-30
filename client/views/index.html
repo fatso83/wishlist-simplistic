@@ -1,15 +1,22 @@
 <body>
+
 {{> header}}
-
-{{#if currentUser}}
-<table>
-    <tr>
-        <td>et ;nske</td>
-    </tr>
-</table>
-{{else}}
-{{> login}}
-{{/if}}
-
+{{> page}}
 
 </body>
+
+<template name="page">
+
+    {{#unless currentUser}}
+    {{> login}}
+    {{else}}
+    <ul class="panel-group" id="accordion">
+
+        {{#each wishes}}
+        {{>wish}}
+        {{/each}}
+
+    </ul>
+    {{/unless}}
+
+</template>

@@ -23,3 +23,4 @@ Accounts.onCreateUser(function (options, user) {
 //Meteor.publish("userdir", function () {
 //	return Meteor.users.find({}, {fields: {emails: 1, name: 1}});
 //});
+

@@ -1,0 +1,46 @@
+<template name="wish">
+
+    <li class="panel panel-default">
+
+        <div class="panel-heading">
+            <span class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{id}}">
+                    {{name}}
+                </a>
+            </span>
+            <span>(Ca pris {{price}} kr)</span>
+        </div>
+
+        <div id="collapse-{{id}}" class="panel-collapse collapse">
+            <div class="panel-body">
+                <p>
+                    {{description}}
+                </p>
+
+                <div id="carousel-{{id}}" class="carousel slide">
+
+                    <ol class="carousel-indicators">
+                        {{#each images}}
+                        <li data-target="#carousel-{{id}}" data-slide-to="{{index}}" class="{{active}}"></li>
+                        {{/each}}
+                    </ol>
+
+                    <!-- Carousel items -->
+                    <div class="carousel-inner">
+                        {{#each images}}
+                        <div class="item {{active}}">
+                            <img src="{{this.url}}" alt />
+                        </div>
+                        {{/each}}
+                    </div>
+
+                    <!-- Carousel nav -->
+                    <a class="carousel-control left" href="#carousel-{{id}}" data-slide="prev">&lsaquo;</a>
+                    <a class="carousel-control right" href="#carousel-{{id}}" data-slide="next">&rsaquo;</a>
+
+                </div>
+            </div>
+        </div>
+    </li>
+
+</template>
