@@ -4,23 +4,26 @@ var findField = function(createdUser, fieldName) {
 
 	return Object.keys(services)
 		.map(function(sName) { return services[sName][fieldName]})
-		.filter(function(val) { return val; });
+		.filter(function(val) { return val; })[0];
 };
 
 Accounts.onCreateUser(function (options, user) {
 	user.profile = {};
-	user.profile.email = findField(user, 'email')[0];
-	user.profile.name = findField(user, 'name')[0];
+	user.profile.email = findField(user, 'email');
+	user.profile.name = findField(user, 'name');
 
-	user.username = user.profile.name || user.profile.email;
+	user.profile.firstName = findField(user, 'first_name') ;
+	user.profile.lastName = findField(user, 'last_name') ;
+
+	user.username = user.profile.name|| user.profile.email;
 	console.log('User object returned', user);
 
 	return user;
 });
 
 
-// funker ikke - tell my why?
+// funker ikke - tell me why?
 //Meteor.publish("userdir", function () {
-//	return Meteor.users.find({}, {fields: {emails: 1, name: 1}});
+//	return Meteor.users.find({}, {fields: {emails: 1, title: 1}});
 //});
 

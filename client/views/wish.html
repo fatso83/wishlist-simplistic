@@ -1,43 +1,65 @@
 <template name="wish">
 
-    <li class="panel panel-default">
+    <li class="wish panel panel-default">
 
-        <div class="panel-heading">
-            <span class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{id}}">
-                    {{name}}
-                </a>
-            </span>
-            <span>(Ca pris {{price}} kr)</span>
-        </div>
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{id}}">
+            <div class="panel-heading">
+                <span class="panel-title"> {{title}} </span>
+                <span>(Ca pris {{price}} kr)</span>
+            </div>
+        </a>
 
-        <div id="collapse-{{id}}" class="panel-collapse collapse">
+        <div id="collapse-{{id}}" class="panel-collapse collapse {{show}}">
             <div class="panel-body">
-                <p>
-                    {{description}}
-                </p>
 
-                <div id="carousel-{{id}}" class="carousel slide">
+                {{!-- Really wish to move this carousel into its own template,
+                but I don't know how to parameterize the template --}}
 
-                    <ol class="carousel-indicators">
-                        {{#each images}}
-                        <li data-target="#carousel-{{id}}" data-slide-to="{{index}}" class="{{active}}"></li>
-                        {{/each}}
-                    </ol>
+                <div class="info-box clearfix">
+                    <div id="carousel-{{id}}" class="carousel slide">
 
-                    <!-- Carousel items -->
-                    <div class="carousel-inner">
-                        {{#each images}}
-                        <div class="item {{active}}">
-                            <img src="{{this.url}}" alt />
+                        <ol class="carousel-indicators">
+                            {{#each images}}
+                            <li data-target="#carousel-{{id}}" data-slide-to="{{index}}" class="{{active}}"></li>
+                            {{/each}}
+                        </ol>
+
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
+                            {{#each images}}
+                            <div class="item {{active}}">
+                                <img src="{{this.url}}" alt/>
+                            </div>
+                            {{/each}}
                         </div>
-                        {{/each}}
+
+                        <!-- Carousel nav -->
+                        <a class="carousel-control left" href="#carousel-{{id}}" data-slide="prev">&lsaquo;</a>
+                        <a class="carousel-control right" href="#carousel-{{id}}" data-slide="next">&rsaquo;</a>
                     </div>
 
-                    <!-- Carousel nav -->
-                    <a class="carousel-control left" href="#carousel-{{id}}" data-slide="prev">&lsaquo;</a>
-                    <a class="carousel-control right" href="#carousel-{{id}}" data-slide="next">&rsaquo;</a>
+                    <ul>
+                        <li><a href="{{url}}">Lenke til produktside</a></li>
+                        <li>Ca prissjikt: {{price}} kr</li>
+                    </ul>
 
+                    <p>
+                        {{description}}
+                    </p>
+
+                </div>
+
+                <div class="action-panel">
+                    <div class="count items-bought">
+                        <span>Jeg har kjøpt</span>
+                        <span class="glyphicon glyphicon-plus-sign"></span>
+                        <span class="glyphicon glyphicon-minus-sign"></span>
+                        <span>4</span>
+                    </div>
+                    <div class="items-left">
+                        <span>Antall gjenværende</span>
+                        <span>4</span>
+                    </div>
                 </div>
             </div>
         </div>

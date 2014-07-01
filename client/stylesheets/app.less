@@ -1,31 +1,97 @@
 //http://www.sitepoint.com/fonts-colors-used-facebook-twitter-google/
 @facebookBlue: #3b5998;
 @personaBlue: #00438f;
+@baseColor: #222;
+@symbolColor: black;
 
-
+body {
+  color : @baseColor;
+}
 #loginFacebook {
-  background: @facebookBlue;
+  background : @facebookBlue;
   span {
-    display: inline-block;
-    width: 16px;
-    font-size: 18px;
-    color : @facebookBlue;
-    background: white;
-    font-weight: 500;
-    margin-right: 5px;
+    display      : inline-block;
+    width        : 16px;
+    font-size    : 18px;
+    color        : @facebookBlue;
+    background   : white;
+    font-weight  : 500;
+    margin-right : 5px;
   }
 }
 
 #loginPersona {
-  background: @personaBlue;
+  background : @personaBlue;
   img {
-    height: 36px;
-    margin: -10px;//much padding in the picture
-    margin-right: 5px;
+    height       : 36px;
+    margin       : -10px; //much padding in the picture
+    margin-right : 5px;
   }
 }
 
 // not used yet - will be used on wishlist when not logged in
 .blur {
-  filter: blur(5px) grayscale(50%);
+  filter : blur(5px) grayscale(50%);
+}
+
+// header
+#header {
+  .info {
+    float   : right;
+    margin  : 10px 0px;
+    padding : 6px 12px;
+  }
+
+  .navbar-header {
+    float : left;
+  }
+
+  #logoutButton {
+    float  : right;
+    margin : 10px 15px;
+  }
+
+  .username {
+    display : block;
+    float   : left;
+  }
+}
+
+// description part
+.wish {
+
+  .panel-heading a {
+    text-decoration: none;
+  }
+
+  .carousel {
+    margin : 6px 25px 0px 0px;
+    width  : 200px;
+    float  : left;
+  }
+
+  .info-box {
+    ul, p {
+      margin-bottom: 10px;
+    }
+  }
+
+  .action-panel {
+
+    padding: 10px;
+
+    .count {
+      font-size : 24px;
+    }
+
+    .glyphicon {
+      color : @symbolColor;
+
+      &.active, &.inactive  { color : grey; }
+
+      // light up on hover and click
+      &:hover { color : lighten(@symbolColor, 30%); }
+      &:active { color : lighten(@symbolColor, 60%); }
+    }
+  }
 }

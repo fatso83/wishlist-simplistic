@@ -1,19 +1,20 @@
 Template.page.wishes = function () {
 	var ids = [44,22,31,1234];
 
-	return ids.map(function (id) {
+	return ids.map(function (id, index) {
 		return {
 			id : id,
 			description : description(),
-			name : name(),
+			title: title(),
 			price : price(),
-			images : images()
+			images : images(),
+			show: index === 0? 'in' : ''
 		};
 	});
 };
 
 
-var name = function () {
+var title = function () {
 	return getRandomVal([
 		'Kenwood KM0220', 'Mummi tallerken',
 		'Bestemorservice', 'Ny tannbørste'
