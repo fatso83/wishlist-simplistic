@@ -1,20 +1,20 @@
 // expose the variable on the global scope to make it globally
 // available (don't "var" it)
 
-Wish = function(doc) {
+Wish = function (doc) {
 	_.extend(this, doc);
 };
 
-Wish.prototype.remaining = function() {
+Wish.prototype.remaining = function () {
 	return remaining(this)
 };
 
-Wish.prototype.bought = function() {
+Wish.prototype.bought = function () {
 	return bought(this)
 };
 
 Wishes = new Meteor.Collection('wishes', {
-	transform : function(doc) {
+	transform : function (doc) {
 		return new Wish(doc);
 	}
 });
@@ -24,6 +24,14 @@ Wishes.allow({
 		return false; // no cowboy inserts -- use createWish method
 	},
 	update : function (userId, wish, fields, modifier) {
+		if (fields.length === 0) {
+			return false;
+		}
+
+		if (_.difference(fields, ['buys']).length > 0) {
+			return false;
+		}
+
 		return userId === wish.owner;
 	},
 	remove : function (userId, wish) {
@@ -41,11 +49,7 @@ Url = Match.Where(function (x) {
 	return !!x.match(/https?:\/\/.*/);
 });
 
-
 dummyØnske = { description : 'et ønske om en god jul', title : 'En riktig god jul', price : 0, images : [], amount_wanted : 1, url : 'http://www.hw.no' };
-buyItem = function () {
-
-};
 
 /*
 * CRUD methods that are running on the server
@@ -66,8 +70,11 @@ buyItem = function () {
 //if (Meteor.isServer) {
 Meteor.methods({
 
-	buy_one: function (wishId) {
+	buy_one : function (wishId) {
+		console.log('buy one')
 		var wish;
+
+		console.log('user', this.userId);
 
 		if (!this.userId) {
 			throw new Meteor.Error(403, "You must be logged in");
@@ -78,12 +85,28 @@ Meteor.methods({
 			throw new Meteor.Error(413, "Invalid wish id");
 		}
 
+		console.error('headf');
 		if ((remaining(wish) - 1) < 0) {
 			throw new Meteor.Error(413, "More bought than available");
 		}
 
-		Wishes.update(wishId, {
-		} )
+
+
+		if(!_.find(wish.buys, function (b) { return b.user === Meteor.userId() })) {
+			console.log('setter inn felt for min bruker')
+			Wishes.update(
+				{ _id : wishId },
+				{ $push : { 'buys' : {user : this.userId, bought : 0} } }
+			);
+		}
+
+		console.log('oppdaterer')
+
+		// increment number of bought items by 1
+		Wishes.update(
+			{ _id : wishId, 'buys.user' : this.userId  },
+			{ $inc : { 'buys.$.bought' : 1}
+			})
 
 	},
 
@@ -120,7 +143,7 @@ Meteor.methods({
 			url           : options.url,
 			images        : options.images.slice(0),
 			amount_wanted : options.amount_wanted,
-			buys : []
+			buys          : []
 		});
 
 		return id;
@@ -138,7 +161,7 @@ var remaining = function (wish) {
 	return wish.amount_wanted - sum;
 };
 
-var bought = function(wish) {
+var bought = function (wish) {
 	return _.reduce(wish.buys, function (memo, transaction) { return memo + transaction.bought; }, 0);
 };
 
