@@ -71,10 +71,8 @@ dummyØnske = { description : 'et ønske om en god jul', title : 'En riktig god 
 Meteor.methods({
 
 	buy_one : function (wishId) {
-		console.log('buy one')
 		var wish;
-
-		console.log('user', this.userId);
+		var userBuys;
 
 		if (!this.userId) {
 			throw new Meteor.Error(403, "You must be logged in");
@@ -85,14 +83,40 @@ Meteor.methods({
 			throw new Meteor.Error(413, "Invalid wish id");
 		}
 
-		console.error('headf');
 		if ((remaining(wish) - 1) < 0) {
 			throw new Meteor.Error(413, "More bought than available");
 		}
 
+		userBuys = _.find(wish.buys, function (b) { return b.user === Meteor.userId() });
+		if (!userBuys) {
+			Wishes.update(
+				{ _id : wishId },
+				{ $push : { 'buys' : {user : this.userId, bought : 0} } }
+			);
+		}
 
+		// increment number of bought items by 1
+		Wishes.update(
+			{ _id : wishId, 'buys.user' : this.userId  },
+			{ $inc : { 'buys.$.bought' : 1}
+			})
 
-		if(!_.find(wish.buys, function (b) { return b.user === Meteor.userId() })) {
+	},
+
+	regret_one : function (wishId) {
+		var wish, userBuys;
+
+		if (!this.userId) {
+			throw new Meteor.Error(403, "You must be logged in");
+		}
+
+		wish = Wishes.findOne(wishId);
+		if (!wish) {
+			throw new Meteor.Error(413, "Invalid wish id");
+		}
+
+		userBuys = _.find(wish.buys, function (b) { return b.user === Meteor.userId() });
+		if (!userBuys) {
 			console.log('setter inn felt for min bruker')
 			Wishes.update(
 				{ _id : wishId },
@@ -100,12 +124,14 @@ Meteor.methods({
 			);
 		}
 
-		console.log('oppdaterer')
+		if ((userBuys.bought - 1) < 0) {
+			throw new Meteor.Error(413, "Cannot subtract less than zero");
+		}
 
 		// increment number of bought items by 1
 		Wishes.update(
 			{ _id : wishId, 'buys.user' : this.userId  },
-			{ $inc : { 'buys.$.bought' : 1}
+			{ $inc : { 'buys.$.bought' : -1}
 			})
 
 	},

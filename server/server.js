@@ -24,6 +24,6 @@ Accounts.onCreateUser(function (options, user) {
 
 // funker ikke - tell me why?
 //Meteor.publish("userdir", function () {
-//	return Meteor.users.find({}, {fields: {emails: 1, title: 1}});
+//	return Meteor.users.userBuys2({}, {fields: {emails: 1, title: 1}});
 //});
 
