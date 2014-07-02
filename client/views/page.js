@@ -1,14 +1,34 @@
-Template.page.events({
+Template.wish.events({
 	'click .glyphicon.glyphicon-minus-sign' : function(e) {
+		e.preventDefault();
+
 		var id = $(e.target).parent().data('wish-id');
 		regret(id);
+
+		// avoids a redirect to the top
+		return false;
 	},
-	'click .glyphicon.glyphicon-plus-sign' : function(e) {
-		var id = $(e.target).parent().data('wish-id');
-		buy(id);
+	'click .glyphicon.glyphicon-plus-sign' : function(e, template) {
+		e.preventDefault();
+
+		var parent = $(e.target).parent();
+		var id = parent.data('wish-id');
+		buy(id, function(err) {
+			if(err) {
+				console.log('ERR', err)
+				template.alertMessage = 'Kan ikke kjøpe flere av denne';
+				template.alertLevel = 'error';
+			} else {
+				console.log('OK')
+				template.alertMessage = 'Endringen er lagret';
+				template.alertLevel = 'info';
+			}
+		});
+
+		// avoids a redirect to the top
+		return false;
 	}
 });
-
 
 Template.page.wishes = function() {
 	return Wishes.find({ },{
@@ -26,6 +46,7 @@ Template.page.wishes = function() {
 		})()
 	});
 };
+
 
 /** only for testing without data
 Template.page.wishes = function () {

@@ -21,16 +21,18 @@ Accounts.onCreateUser(function (options, user) {
 });
 
 // never seen this work ...
-Accounts.onLogin(function(){
+Accounts.onLogin(function(logonDetails){
 
-	var u = Meteor.user();
+//	var u = Meteor.Users.findOne({'_id' : logonDetails.user._id });
+	var u = logonDetails.user;
 	if(u.visited) {
 		Session.set('visited', true);
 	} else {
-		Users.update(
-			{'_id' : Meteor.userId() },
-			{ visited : true }
-		)
+		// db undefined
+//		db.users.update(
+//			{'_id' : u._id },
+//			{ visited : true }
+//		);
 		Session.set('visited', false);
 	}
 

@@ -80,12 +80,18 @@ Url = Match.Where(function (x) {
 
 dummyØnske = { description : 'et ønske om en god jul', title : 'En riktig god jul', price : 0, images : [], amount_wanted : 1, url : 'http://www.hw.no' };
 
-buy = function (wishId) {
-	Meteor.call('buy_one', wishId);
+buy = function (wishId, callback) {
+	Meteor.call('buy_one', wishId, function(err) {
+		err && console.log('Fikk ikke lov til å kjøpe', err);
+		callback(err);
+	});
 };
 
-regret = function (wishId) {
-	Meteor.call('regret_one', wishId);
+regret = function (wishId, callback) {
+	Meteor.call('regret_one', wishId, function(err){
+		err && console.log('Fikk ikke lov til å fjerne', err);
+		callback(err);
+	});
 };
 
 /*
@@ -160,7 +166,6 @@ Meteor.methods({
 			);
 		}
 
-		console.log('buys',boughtByUser);
 		if ((boughtByUser - 1) < 0) {
 			throw new Meteor.Error(413, "Cannot subtract less than zero");
 		}
