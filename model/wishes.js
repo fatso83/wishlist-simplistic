@@ -9,8 +9,16 @@ Wish.prototype.remaining = function () {
 	return remaining(this)
 };
 
-Wish.prototype.bought = function () {
-	return bought(this)
+Wish.prototype.totalBought = function () {
+	return totalBought(this)
+};
+
+Wish.prototype.hasPurchased = function() {
+	return userBuyCount(this) > 0;
+};
+
+Wish.prototype.userBuyCount = function() {
+	return userBuyCount(this);
 };
 
 Wishes = new Meteor.Collection('wishes', {
@@ -36,7 +44,7 @@ Wishes.allow({
 	},
 	remove : function (userId, wish) {
 		// You can only remove parties that you created and nobody is going to.
-		return wish.owner === userId && bought(wish) === 0;
+		return wish.owner === userId && totalBought(wish) === 0;
 	}
 });
 
@@ -83,11 +91,11 @@ Meteor.methods({
 			throw new Meteor.Error(413, "Invalid wish id");
 		}
 
-		if ((remaining(wish) - 1) < 0) {
+		if ((wish.remaining() - 1) < 0) {
 			throw new Meteor.Error(413, "More bought than available");
 		}
 
-		userBuys = _.find(wish.buys, function (b) { return b.user === Meteor.userId() });
+		userBuys = wish.userBuyCount();
 		if (!userBuys) {
 			Wishes.update(
 				{ _id : wishId },
@@ -115,9 +123,8 @@ Meteor.methods({
 			throw new Meteor.Error(413, "Invalid wish id");
 		}
 
-		userBuys = _.find(wish.buys, function (b) { return b.user === Meteor.userId() });
+		userBuys = wish.userBuyCount();
 		if (!userBuys) {
-			console.log('setter inn felt for min bruker')
 			Wishes.update(
 				{ _id : wishId },
 				{ $push : { 'buys' : {user : this.userId, bought : 0} } }
@@ -159,6 +166,10 @@ Meteor.methods({
 			throw new Meteor.Error(403, "You must be logged in");
 		}
 
+		var email = Meteor.user().profile.email;
+		if(!email.match(/carlerik@gmail.com|ida\.?angel\.?weum@gmail.com/)) {
+			throw new Meteor.Error(400, "You must be the groom or bride");
+		}
 
 		var id = options._id || Random.id();
 		Wishes.insert({
@@ -183,11 +194,11 @@ if (Meteor.isClient) {
 
 // helpers
 var remaining = function (wish) {
-	var sum = bought(wish);
+	var sum = totalBought(wish);
 	return wish.amount_wanted - sum;
 };
 
-var bought = function (wish) {
+var totalBought = function (wish) {
 	return _.reduce(wish.buys, function (memo, transaction) { return memo + transaction.bought; }, 0);
 };
 
@@ -197,3 +208,6 @@ createWish = function (options) {
 	return id;
 };
 
+userBuyCount = function(wish) {
+	return _.find(wish.buys, function (b) { return b.user === Meteor.userId() });
+};
