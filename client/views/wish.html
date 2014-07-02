@@ -19,16 +19,16 @@
                     <div id="carousel-{{_id}}" class="carousel slide">
 
                         <ol class="carousel-indicators">
-                            {{#each images}}
-                            <li data-target="#carousel-{{_id}}" data-slide-to="{{index}}" class="{{active}}"></li>
+                            {{#each indexedImages}}
+                            <li data-target="#carousel-{{../_id}}" data-slide-to="{{index}}" class="{{active}}"></li>
                             {{/each}}
                         </ol>
 
                         <!-- Carousel items -->
                         <div class="carousel-inner">
-                            {{#each images}}
+                            {{#each indexedImages}}
                             <div class="item {{active}}">
-                                <img src="{{this.url}}" alt/>
+                                <img src="{{url}}" alt/>
                             </div>
                             {{/each}}
                         </div>
