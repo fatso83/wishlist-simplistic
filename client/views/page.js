@@ -1,18 +1,30 @@
+Template.page.events({
+//	'click .glyphicon.glyphicon-plus-sign' : function(e) {
+	'click .glyphicon' : function(e) {
+		console.log(e)
+		var id = $(e.target).parent().data('wish-id');
+		console.log(id);
+
+	}
+});
+
 Template.page.wishes = function () {
 	var ids = [44,22,31,1234];
 
 	return ids.map(function (id, index) {
-		return {
+		return new Wish({
 			id : id,
 			description : description(),
 			title: title(),
 			price : price(),
 			images : images(),
-			show: index === 0? 'in' : ''
-		};
+			url : 'http://1234.no',
+			show: index === 0? 'in' : '',
+			buys :[],
+			wanted_amount : ((Math.random() * 10) >> 0)
+		});
 	});
 };
-
 
 var title = function () {
 	return getRandomVal([

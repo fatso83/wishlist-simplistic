@@ -59,6 +59,14 @@ Url = Match.Where(function (x) {
 
 dummyØnske = { description : 'et ønske om en god jul', title : 'En riktig god jul', price : 0, images : [], amount_wanted : 1, url : 'http://www.hw.no' };
 
+buy = function(wishId) {
+	Meteor.call('buy_one', wishId);
+};
+
+regret = function(wishId) {
+	Meteor.call('regret_one', wishId);
+};
+
 /*
 * CRUD methods that are running on the server
 *
@@ -149,8 +157,8 @@ Meteor.methods({
 			title         : NonEmptyString,
 			description   : NonEmptyString,
 			price         : Number,
-			url           : Url,
-			amount_wanted : Number,
+			url           : Match.Optional(Url),
+			amount_wanted : Match.Optional(Number),
 			images        : Array
 		});
 
@@ -177,9 +185,9 @@ Meteor.methods({
 			owner         : this.userId,
 			title         : options.title,
 			description   : options.description,
-			url           : options.url,
+			url           : options.url || '',
 			images        : options.images.slice(0),
-			amount_wanted : options.amount_wanted,
+			amount_wanted : options.amount_wanted || 1,
 			buys          : []
 		});
 

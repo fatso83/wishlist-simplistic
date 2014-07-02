@@ -50,15 +50,19 @@
                 </div>
 
                 <div class="action-panel">
-                    <div class="count items-bought">
+                    <div data-wish-id={{id}} class="count items-bought">
                         <span>Jeg har kjøpt</span>
                         <span class="glyphicon glyphicon-plus-sign"></span>
                         <span class="glyphicon glyphicon-minus-sign"></span>
-                        <span>4</span>
+                        <span>{{bought}}</span>
                     </div>
                     <div class="items-left">
                         <span>Antall gjenværende</span>
-                        <span>4</span>
+                        <span>{{remaining}}</span>
+                    </div>
+                    <div class="items-wanted">
+                        <span>Antall ønsket totalt</span>
+                        <span>{{wanted_amount}}</span>
                     </div>
                 </div>
             </div>
