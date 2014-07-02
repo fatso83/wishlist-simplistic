@@ -54,7 +54,15 @@
 
                         <ul>
                             <li><a href="{{url}}">Lenke til produktside</a></li>
-                            <li>Ca prissjikt: {{price}} kr</li>
+                            <li>Prissjikt: {{price}} kr</li>
+                            <li class="items-left">
+                                <span>Antall gjenværende</span>
+                                <span>{{remaining}}</span>
+                            </li>
+                            <li class="items-wanted">
+                                <span>Antall ønsket totalt</span>
+                                <span>{{amount_wanted}}</span>
+                            </li>
                         </ul>
 
                         <p>
@@ -63,25 +71,31 @@
 
                     </div>
 
+
                     <div class="action-panel">
                         <div data-wish-id={{_id}} class="count items-bought">
-                            <span>Jeg har kjøpt</span>
-                            <button class="glyphicon glyphicon-plus-sign"></button>
-                            <button class="glyphicon glyphicon-minus-sign"></button>
-                            <span>{{userBuyCount}}</span>
-                        </div>
-                        <div class="items-left">
-                            <span>Antall gjenværende</span>
-                            <span>{{remaining}}</span>
-                        </div>
-                        <div class="items-wanted">
-                            <span>Antall ønsket totalt</span>
-                            <span>{{amount_wanted}}</span>
+                            <span class="text">Jeg har kjøpt</span>
+                            <span class="count">{{userBuyCount}}</span>
+                            <a href="#" class="glyphicon glyphicon-plus-sign"></a>
+                            <a href="#" class="glyphicon glyphicon-minus-sign"></a>
                         </div>
                     </div>
+
+                    {{#if alertMessage}}
+                    {{> alert}}
+                    {{/if}}
+
                 </div>
             </div>
         </div>
     </li>
 
+</template>
+
+<template name="alert">
+        <div class="alert alert-{{alertLevel}} alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span
+                    aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            {{alertMessage}}
+        </div>
 </template>

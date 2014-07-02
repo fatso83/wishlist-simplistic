@@ -3,12 +3,13 @@
 @personaBlue: #00438f;
 @baseBodyColor: #222;
 @symbolColor: black;
-@yellowFoursquare : #FBFCEE;
-@blueFoursquare : #A5C4D2;
+@yellowFoursquare : #fbfcee;
+@blueFoursquare : #a5c4d2;
 
 body {
   color : @baseBodyColor;
 }
+
 #loginFacebook {
   background : @facebookBlue;
   span {
@@ -60,50 +61,57 @@ body {
 }
 
 #accordion {
-  padding: 0 20px;
-  max-width: 800px;
+  padding   : 0 20px;
+  max-width : 800px;
 }
 
 // description part
 .wish {
 
-
-
   .wish-completed {
-    background-color: #eee;
+    background-color : #eee;
   }
 
   .panel-heading a {
-    text-decoration: none;
+    text-decoration : none;
   }
 
   .carousel {
-    float: left;
+    float  : left;
     margin : 6px 25px 0px 0px;
     width  : 200px;
   }
 
   .action-info {
-    overflow: hidden;
+    overflow : hidden;
   }
 
   .info-box {
     ul, p {
-      margin-bottom: 10px;
+      margin-bottom : 10px;
     }
   }
 
-  .action-panel {
-    padding: 10px;
+  // no change in height when clicking away alerts
+  .alerts {
+//    height        : 52px;
+  }
 
-    .count {
-      font-size : 24px;
-    }
+  .items-bought {
+//    padding-bottom : 20px;
+  }
+
+  .count {
+    font-size : 24px;
+  }
+
+  .action-panel {
+    padding : 10px 0;
 
     .glyphicon {
       color : @symbolColor;
 
-      &.active, &.inactive  { color : grey; }
+      &.active, &.inactive { color : grey; }
 
       // light up on hover and click
       &:hover { color : lighten(@symbolColor, 30%); }
@@ -111,7 +119,6 @@ body {
     }
   }
 }
-
 
 @media only screen
 and (max-width : 600px) {
@@ -123,7 +130,7 @@ and (max-width : 600px) {
 @media only screen
 and (max-width : 400px) {
   .wish .panel-title-price {
-    display: none;
+    display : none;
   }
 }
 
@@ -135,14 +142,14 @@ and (min-width : 400px) {
   }
 }
 
-#loader{
-  position: absolute;
-  width: 100%;
-  top:0;
-  bottom:0;
-  background: fade(@blueFoursquare, 20%);
-  text-align: center;
-  background-image: url('/images/ajax-loader.gif');
-  background-position: center center;
-  background-repeat: no-repeat;
+#loader {
+  position            : absolute;
+  width               : 100%;
+  top                 : 0;
+  bottom              : 0;
+  background          : fade(@blueFoursquare, 20%);
+  text-align          : center;
+  background-image    : url('/images/ajax-loader.gif');
+  background-position : center center;
+  background-repeat   : no-repeat;
 }
