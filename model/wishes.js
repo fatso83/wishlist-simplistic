@@ -141,7 +141,7 @@ Meteor.methods({
 	},
 
 	regret_one : function (wishId) {
-		var wish, userBuys;
+		var wish, boughtByUser;
 
 		if (!this.userId) {
 			throw new Meteor.Error(403, "You must be logged in");
@@ -152,15 +152,16 @@ Meteor.methods({
 			throw new Meteor.Error(413, "Invalid wish id");
 		}
 
-		userBuys = wish.userBuyCount();
-		if (!userBuys) {
+		boughtByUser = wish.userBuyCount();
+		if (!boughtByUser) {
 			Wishes.update(
 				{ _id : wishId },
 				{ $push : { 'buys' : {user : this.userId, bought : 0} } }
 			);
 		}
 
-		if ((userBuys.bought - 1) < 0) {
+		console.log('buys',boughtByUser);
+		if ((boughtByUser - 1) < 0) {
 			throw new Meteor.Error(413, "Cannot subtract less than zero");
 		}
 
