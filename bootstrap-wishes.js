@@ -1,7 +1,7 @@
 // initialize db with wishes
 createWishList = function () {
 	var wishes = [
-		new Wish({
+		{
 			title         : 'Kenwood Major Titanium KMM020',
 			description   : [
 				'Kenwood Major Titanium KMM020 er en ',
@@ -14,11 +14,11 @@ createWishList = function () {
 
 			],
 			url           : 'http://elkjop.no',
-			wanted_amount : 1
-		}),
+			amount_wanted : 1
+		},
 
 
-		new Wish({
+		{
 			title         : 'Kenwood Chef råkostkutter',
 			description   : [
 				'Tilbehør til Kenwood Major Titanium KMM020',
@@ -29,10 +29,10 @@ createWishList = function () {
 
 			],
 			url           : 'http://elkjop.no',
-			wanted_amount : 1
-		}),
+			amount_wanted : 1
+		},
 
-		new Wish({
+		{
 			title         : 'Kenwood Chef kjøttkvern',
 			description   : [
 				'Tilbehør til Kenwood Major Titanium KMM020',
@@ -43,10 +43,10 @@ createWishList = function () {
 
 			],
 			url           : 'http://elkjop.no',
-			wanted_amount : 1
-		}),
+			amount_wanted : 1
+		},
 
-		new Wish({
+		{
 			title         : 'Kenwood ismaskin A957',
 			description   : [
 				'Tilbehør til Kenwood Major Titanium KMM020',
@@ -57,24 +57,24 @@ createWishList = function () {
 
 			],
 			url           : 'http://elkjop.no',
-			wanted_amount : 1
-		}),
+			amount_wanted : 1
+		},
 
 
-		new Wish({
+		{
 			title         : 'Gassbrenner til mat',
 			description   : [
-				'Gassbrenner som egner seg til å tilberede mat (svi ribba, brenne biffen, '
+				'Gassbrenner som egner seg til å tilberede mat (svi ribba, brenne biffen, ',
 				'creme brulee, etc).'
 			].join(" "),
 			price         : 150,
 			images        : [
 			],
 			url           : 'http://biltema.no/no/Verktoy/Sveising-og-lodding/Gassbrenner/Minibrenner-Gourmet-17612',
-			wanted_amount : 1
-		}),
+			amount_wanted : 1
+		},
 
-		new Wish({
+		{
 			title         : 'Anova Sous Vide Immersion Circulators',
 			description   : [
 				'Rimelig og brukervennlig sous-vide maskin fra Anova.'
@@ -84,11 +84,11 @@ createWishList = function () {
 
 			],
 			url           : 'http://anovaculinary.com/products/anova',
-			wanted_amount : 1
-		}),
+			amount_wanted : 1
+		},
 
 
-		new Wish({
+		{
 			title         : 'Baking Steel (PizzaPro, Modernist Cuisine, e.l.)',
 			description   : [
 				'En stålplate som er 8mm tykk og veier 10 kilo '
@@ -98,11 +98,11 @@ createWishList = function () {
 
 			],
 			url           : 'http://www.sousvidenorge.no/produkt/kjokkenredskap/pizza-pro-stalplate/pizzapro-stalplate',
-			wanted_amount : 1
-		}),
+			amount_wanted : 1
+		},
 
 
-		new Wish({
+		{
 			title         : 'Manuell kaffekvern',
 			description   : [
 				'En god, gammeldags, solid, manuell kaffekvern med flere innstillingsgrader. ',
@@ -112,12 +112,11 @@ createWishList = function () {
 			price         : 300,
 			images        : [
 			],
-			url           : '',
-			wanted_amount : 1
-		}),
+			amount_wanted : 1
+		},
 
 
-		new Wish({
+		{
 			title         : 'Stekegryte',
 			description   : [
 				'Le Creuset stekegryte 32cm/7l'
@@ -125,12 +124,13 @@ createWishList = function () {
 			price         : 2000,
 			images        : [
 			],
-			url           : '',
-			wanted_amount : 1
-		}),
+
+			url           : 'http://www.lecreuset.no',
+			amount_wanted : 1
+		},
 
 
-		new Wish({
+		{
 			title         : 'Melkegryte',
 			description   : [
 				'Le Creuset 3-Ply melkegryte - 14 cm. ca 1000kr'
@@ -139,11 +139,11 @@ createWishList = function () {
 			images        : [
 			],
 			url           : 'http://www.lecreuset.no',
-			wanted_amount : 1
-		}),
+			amount_wanted : 1
+		},
 
 
-		new Wish({
+		{
 			title         : 'Grillpanne',
 			description   : [
 				'Kvadratisk grillpanne i støpejern, 26 cm. Mange fine farge'
@@ -152,11 +152,11 @@ createWishList = function () {
 			images        : [
 			],
 			url           : 'http://www.lecreuset.no/Kvadratisk-grillpanne-i-stopejern-no.aspx',
-			wanted_amount : 1
-		}),
+			amount_wanted : 1
+		},
 
 
-		new Wish({
+		{
 			title         : 'Ramekin/Minigryte, 10cm',
 			description   : [
 				'Ramekin/Minigryte. Mange fine farger. Gjerne forskjellige!'
@@ -165,11 +165,11 @@ createWishList = function () {
 			images        : [
 			],
 			url           : 'http://www.lecreuset.no/Mini-gryte-i-stentoy-no.aspx',
-			wanted_amount : 4
-		}),
+			amount_wanted : 4
+		},
 
 
-		new Wish({
+		{
 			title         : 'Ramekin/Minigryte, 6cm',
 			description   : [
 				'Ramekin/Minigryte. Mange fine farger. Gjerne forskjellige!'
@@ -178,12 +178,13 @@ createWishList = function () {
 			images        : [
 			],
 			url           : 'http://www.lecreuset.no/Mini-gryte-i-stentoy-no.aspx',
-			wanted_amount : 6
-		})
+			amount_wanted : 6
+		}
 
 	];
 
 	wishes.forEach(function (w) {
+		console.log('Creating wish: ', w.title);
 		createWish(w);
-	})
+	});
 };

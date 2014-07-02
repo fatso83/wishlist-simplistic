@@ -13,11 +13,11 @@ Wish.prototype.totalBought = function () {
 	return totalBought(this)
 };
 
-Wish.prototype.hasPurchased = function() {
+Wish.prototype.hasPurchased = function () {
 	return userBuyCount(this) > 0;
 };
 
-Wish.prototype.userBuyCount = function() {
+Wish.prototype.userBuyCount = function () {
 	return userBuyCount(this);
 };
 
@@ -59,11 +59,11 @@ Url = Match.Where(function (x) {
 
 dummyØnske = { description : 'et ønske om en god jul', title : 'En riktig god jul', price : 0, images : [], amount_wanted : 1, url : 'http://www.hw.no' };
 
-buy = function(wishId) {
+buy = function (wishId) {
 	Meteor.call('buy_one', wishId);
 };
 
-regret = function(wishId) {
+regret = function (wishId) {
 	Meteor.call('regret_one', wishId);
 };
 
@@ -175,7 +175,7 @@ Meteor.methods({
 		}
 
 		var email = Meteor.user().profile.email;
-		if(!email.match(/carlerik@gmail.com|ida\.?angel\.?weum@gmail.com/)) {
+		if (!email.match(/carlerik@gmail.com|ida\.?angel\.?weum@gmail.com/)) {
 			throw new Meteor.Error(400, "You must be the groom or bride");
 		}
 
@@ -185,6 +185,7 @@ Meteor.methods({
 			owner         : this.userId,
 			title         : options.title,
 			description   : options.description,
+			price         : options.price,
 			url           : options.url || '',
 			images        : options.images.slice(0),
 			amount_wanted : options.amount_wanted || 1,
@@ -216,6 +217,7 @@ createWish = function (options) {
 	return id;
 };
 
-userBuyCount = function(wish) {
-	return _.find(wish.buys, function (b) { return b.user === Meteor.userId() });
+userBuyCount = function (wish) {
+	var data =_.find(wish.buys, function (b) { return b.user === Meteor.userId() });
+	return data? data.bought : 0;
 };

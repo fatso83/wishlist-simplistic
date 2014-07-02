@@ -1,13 +1,20 @@
 Template.page.events({
-//	'click .glyphicon.glyphicon-plus-sign' : function(e) {
-	'click .glyphicon' : function(e) {
-		console.log(e)
+	'click .glyphicon.glyphicon-minus-sign' : function(e) {
 		var id = $(e.target).parent().data('wish-id');
-		console.log(id);
-
+		regret(id);
+	},
+	'click .glyphicon.glyphicon-plus-sign' : function(e) {
+		var id = $(e.target).parent().data('wish-id');
+		buy(id);
 	}
 });
 
+
+Template.page.wishes = function() {
+	return Wishes.find();
+};
+
+/** only for testing without data
 Template.page.wishes = function () {
 	var ids = [44,22,31,1234];
 
@@ -53,3 +60,4 @@ var images = function () {
 	].map(function (img, i) { return {url : img, index : i, active : i === 0 ? 'active' : ''}; });
 };
 
+ */
