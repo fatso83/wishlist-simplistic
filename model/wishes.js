@@ -3,6 +3,13 @@
 
 Wish = function (doc) {
 	_.extend(this, doc);
+	if(!this.images.length) {
+		this.images.push('http://www.eliaasen.no/filer/produkter/bilde_mangler.jpg');
+	}
+};
+
+Wish.prototype.completed = function() {
+	return remaining() == 0;
 };
 
 Wish.prototype.remaining = function () {
@@ -19,6 +26,12 @@ Wish.prototype.hasPurchased = function () {
 
 Wish.prototype.userBuyCount = function () {
 	return userBuyCount(this);
+};
+
+Wish.prototype.indexedImages = function () {
+	return this.images.map(function(img, i){
+		return { url : img, index : i, active : i === 0? 'active' : ''};
+	})
 };
 
 Wishes = new Meteor.Collection('wishes', {
