@@ -25,54 +25,59 @@
                 {{!-- Really wish to move this carousel into its own template,
                 but I don't know how to parameterize the template --}}
 
-                <div class="info-box clearfix">
-                    <div id="carousel-{{_id}}" class="carousel slide">
 
-                        <ol class="carousel-indicators">
-                            {{#each indexedImages}}
-                            <li data-target="#carousel-{{../_id}}" data-slide-to="{{index}}" class="{{active}}"></li>
-                            {{/each}}
-                        </ol>
+                <div id="carousel-{{_id}}" class="carousel slide">
 
-                        <!-- Carousel items -->
-                        <div class="carousel-inner">
-                            {{#each indexedImages}}
-                            <div class="item {{active}}">
-                                <img src="{{url}}" alt/>
-                            </div>
-                            {{/each}}
+                    <ol class="carousel-indicators">
+                        {{#each indexedImages}}
+                        <li data-target="#carousel-{{../_id}}" data-slide-to="{{index}}" class="{{active}}"></li>
+                        {{/each}}
+                    </ol>
+
+                    <!-- Carousel items -->
+                    <div class="carousel-inner">
+                        {{#each indexedImages}}
+                        <div class="item {{active}}">
+                            <img src="{{url}}" alt/>
                         </div>
-
-                        <!-- Carousel nav -->
-                        <a class="carousel-control left" href="#carousel-{{_id}}" data-slide="prev">&lsaquo;</a>
-                        <a class="carousel-control right" href="#carousel-{{_id}}" data-slide="next">&rsaquo;</a>
+                        {{/each}}
                     </div>
 
-                    <ul>
-                        <li><a href="{{url}}">Lenke til produktside</a></li>
-                        <li>Ca prissjikt: {{price}} kr</li>
-                    </ul>
-
-                    <p>
-                        {{description}}
-                    </p>
-
+                    <!-- Carousel nav -->
+                    <a class="carousel-control left" href="#carousel-{{_id}}" data-slide="prev">&lsaquo;</a>
+                    <a class="carousel-control right" href="#carousel-{{_id}}" data-slide="next">&rsaquo;</a>
                 </div>
 
-                <div class="action-panel">
-                    <div data-wish-id={{_id}} class="count items-bought">
-                        <span>Jeg har kjøpt</span>
-                        <span class="glyphicon glyphicon-plus-sign"></span>
-                        <span class="glyphicon glyphicon-minus-sign"></span>
-                        <span>{{userBuyCount}}</span>
+                <div class="action-info">
+
+                    <div class="info-box">
+
+                        <ul>
+                            <li><a href="{{url}}">Lenke til produktside</a></li>
+                            <li>Ca prissjikt: {{price}} kr</li>
+                        </ul>
+
+                        <p>
+                            {{description}}
+                        </p>
+
                     </div>
-                    <div class="items-left">
-                        <span>Antall gjenværende</span>
-                        <span>{{remaining}}</span>
-                    </div>
-                    <div class="items-wanted">
-                        <span>Antall ønsket totalt</span>
-                        <span>{{amount_wanted}}</span>
+
+                    <div class="action-panel">
+                        <div data-wish-id={{_id}} class="count items-bought">
+                            <span>Jeg har kjøpt</span>
+                            <button class="glyphicon glyphicon-plus-sign"></button>
+                            <button class="glyphicon glyphicon-minus-sign"></button>
+                            <span>{{userBuyCount}}</span>
+                        </div>
+                        <div class="items-left">
+                            <span>Antall gjenværende</span>
+                            <span>{{remaining}}</span>
+                        </div>
+                        <div class="items-wanted">
+                            <span>Antall ønsket totalt</span>
+                            <span>{{amount_wanted}}</span>
+                        </div>
                     </div>
                 </div>
             </div>

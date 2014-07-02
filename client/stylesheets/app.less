@@ -67,6 +67,8 @@ body {
 // description part
 .wish {
 
+
+
   .wish-completed {
     background-color: #eee;
   }
@@ -76,8 +78,13 @@ body {
   }
 
   .carousel {
+    float: left;
     margin : 6px 25px 0px 0px;
     width  : 200px;
+  }
+
+  .action-info {
+    overflow: hidden;
   }
 
   .info-box {
@@ -87,7 +94,6 @@ body {
   }
 
   .action-panel {
-
     padding: 10px;
 
     .count {
@@ -103,6 +109,14 @@ body {
       &:hover { color : lighten(@symbolColor, 30%); }
       &:active { color : lighten(@symbolColor, 60%); }
     }
+  }
+}
+
+
+@media only screen
+and (max-width : 600px) {
+  .wish .carousel {
+    float : none;
   }
 }
 

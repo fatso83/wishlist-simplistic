@@ -20,6 +20,22 @@ Accounts.onCreateUser(function (options, user) {
 	return user;
 });
 
+// never seen this work ...
+Accounts.onLogin(function(){
+
+	var u = Meteor.user();
+	if(u.visited) {
+		Session.set('visited', true);
+	} else {
+		Users.update(
+			{'_id' : Meteor.userId() },
+			{ visited : true }
+		)
+		Session.set('visited', false);
+	}
+
+});
+
 
 // funker ikke - tell me why?
 //Meteor.publish("userdir", function () {
