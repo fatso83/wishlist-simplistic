@@ -11,7 +11,7 @@ Template.page.events({
 
 
 Template.page.wishes = function() {
-	return Wishes.find();
+	return Wishes.find({},{ sort : [['price','desc'],["title"]]});
 };
 
 /** only for testing without data
