@@ -1,8 +1,5 @@
-Template.header.userString = function() {
-	var u = Meteor.user();
-	return (u.profile && u.profile.name)
-		|| (u.emails && u.emails[0].address)
-		|| "your_email";
+Template.header.displayName = function() {
+	return displayName(Meteor.user());
 };
 
 Template.header.events({
@@ -18,3 +15,8 @@ Template.header.events({
 		});
 	}
 });
+
+displayName = function (user) {
+	return user.profile.name || user.profile.email;
+};
+

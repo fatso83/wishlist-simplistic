@@ -9,7 +9,15 @@ Wish = function (doc) {
 };
 
 Wish.prototype.completed = function() {
-	return remaining() == 0;
+	return this.remaining() == 0;
+};
+
+Wish.prototype.class_completed = function() {
+	return this.completed()? 'wish-completed' : '';
+};
+
+Wish.prototype.class_show = function() {
+	return this.index === 0? 'in' : '';
 };
 
 Wish.prototype.remaining = function () {
@@ -21,7 +29,7 @@ Wish.prototype.totalBought = function () {
 };
 
 Wish.prototype.hasPurchased = function () {
-	return userBuyCount(this) > 0;
+	return this.userBuyCount() > 0;
 };
 
 Wish.prototype.userBuyCount = function () {
@@ -193,7 +201,6 @@ Meteor.methods({
 		}
 
 		var id = options._id || Random.id();
-		console.log('fikk id', options._id, 'lagret id', id);
 		Wishes.insert({
 			_id           : id,
 			owner         : this.userId,

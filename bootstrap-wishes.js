@@ -196,7 +196,6 @@ createWishList = function () {
 
 	// create wishes
 	var ids = wishes.map(function (w) {
-		console.log('Creating wish: ', w.title);
 		return createWish(w);
 	});
 

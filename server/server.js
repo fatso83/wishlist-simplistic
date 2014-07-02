@@ -15,7 +15,6 @@ Accounts.onCreateUser(function (options, user) {
 	user.profile.firstName = findField(user, 'first_name') ;
 	user.profile.lastName = findField(user, 'last_name') ;
 
-	user.username = user.profile.name|| user.profile.email;
 	console.log('User object returned', user);
 
 	return user;

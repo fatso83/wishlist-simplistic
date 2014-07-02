@@ -11,7 +11,20 @@ Template.page.events({
 
 
 Template.page.wishes = function() {
-	return Wishes.find({},{ sort : [['price','desc'],["title"]]});
+	return Wishes.find({ },{
+		sort : [['price','desc'],["title"]],
+		limit: 100,
+		transform : (function() {
+			var index = 0;
+			return function(doc) {
+				var w = new Wish(doc);
+				w.index = index;
+				index++;
+
+				return w;
+			}
+		})()
+	});
 };
 
 /** only for testing without data
