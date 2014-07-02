@@ -175,11 +175,11 @@ Meteor.methods({
 			images        : Array
 		});
 
-		if (options.title.length > 100) {
+		if (options.title.length > 25) {
 			throw new Meteor.Error(413, "Title too long");
 		}
 
-		if (options.description.length > 1000) {
+		if (options.description.length > 400) {
 			throw new Meteor.Error(413, "Description too long");
 		}
 
@@ -193,6 +193,7 @@ Meteor.methods({
 		}
 
 		var id = options._id || Random.id();
+		console.log('fikk id', options._id, 'lagret id', id);
 		Wishes.insert({
 			_id           : id,
 			owner         : this.userId,

@@ -2,7 +2,7 @@
 createWishList = function () {
 	var wishes = [
 		{
-			title         : 'Kenwood Major Titanium KMM020',
+			title         : 'Kenwood kjøkkenmaskin',
 			description   : [
 				'Kenwood Major Titanium KMM020 er en ',
 				'kraftig kjøkkenmaskin som man kan få et utall',
@@ -77,9 +77,10 @@ createWishList = function () {
 		},
 
 		{
-			title         : 'Anova Sous Vide Immersion Circulators',
+			title         : 'Anova Sous Vide',
 			description   : [
-				'Rimelig og brukervennlig sous-vide maskin fra Anova.'
+				'Anova Sous Vide Immersion Circulators.',
+				'Brukervennlig sous-vide maskin fra Anova.'
 			].join(" "),
 			price         : 1500,
 			images        : [
@@ -196,7 +197,7 @@ createWishList = function () {
 	// create wishes
 	var ids = wishes.map(function (w) {
 		console.log('Creating wish: ', w.title);
-		createWish(w);
+		return createWish(w);
 	});
 
 	// update any wishes we know of
