@@ -1,11 +1,13 @@
 //http://www.sitepoint.com/fonts-colors-used-facebook-twitter-google/
 @facebookBlue: #3b5998;
 @personaBlue: #00438f;
-@baseColor: #222;
+@baseBodyColor: #222;
 @symbolColor: black;
+@yellowFoursquare : #FBFCEE;
+@blueFoursquare : #A5C4D2;
 
 body {
-  color : @baseColor;
+  color : @baseBodyColor;
 }
 #loginFacebook {
   background : @facebookBlue;
@@ -55,6 +57,11 @@ body {
     display : block;
     float   : left;
   }
+}
+
+#accordion {
+  padding: 0 20px;
+  max-width: 800px;
 }
 
 // description part
@@ -114,3 +121,14 @@ and (min-width : 400px) {
   }
 }
 
+#loader{
+  position: absolute;
+  width: 100%;
+  top:0;
+  bottom:0;
+  background: fade(@blueFoursquare, 20%);
+  text-align: center;
+  background-image: url('/images/ajax-loader.gif');
+  background-position: center center;
+  background-repeat: no-repeat;
+}

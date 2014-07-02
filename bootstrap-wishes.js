@@ -1,3 +1,4 @@
+
 // initialize db with wishes
 createWishList = function () {
 	var wishes = [
