@@ -24,17 +24,17 @@ Accounts.onCreateUser(function (options, user) {
 Accounts.onLogin(function(logonDetails){
 
 //	var u = Meteor.Users.findOne({'_id' : logonDetails.user._id });
-	var u = logonDetails.user;
-	if(u.visited) {
-		Session.set('visited', true);
-	} else {
+//	var u = logonDetails.user;
+//	if(u.visited) {
+//		Session.set('visited', true);
+//	} else {
 		// db undefined
 //		db.users.update(
 //			{'_id' : u._id },
 //			{ visited : true }
 //		);
-		Session.set('visited', false);
-	}
+//		Session.set('visited', false);
+//	}
 
 });
 
