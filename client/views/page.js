@@ -32,7 +32,7 @@ Template.wish.events({
 
 Template.page.wishes = function() {
 	return Wishes.find({ },{
-		sort : [['price','desc'],["title"]],
+		sort : [['price','asc'],["title"]],
 		limit: 100,
 		transform : (function() {
 			var index = 0;

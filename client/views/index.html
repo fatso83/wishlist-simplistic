@@ -13,14 +13,18 @@
     <ul class="panel-group" id="accordion">
 
         {{#each wishes}}
+        {{!-- #unless completed}}-->
+        <!--{{>wish}}-->
+        <!--{{/unless}}-->
+        <!--{{/each}}-->
+<!---->
+        <!--{{#each wishes}}-->
+        {{#if completed--}}
         {{>wish}}
+        <!--{{/if}}-->
         {{/each}}
 
     </ul>
     {{/unless}}
-
-    <!--{{#if loggingIn}}-->
-    <!--<div id="loader"></div>-->
-    <!--{{/if}}-->
 
 </template>

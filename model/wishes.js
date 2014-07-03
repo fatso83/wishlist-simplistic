@@ -36,10 +36,8 @@ Wish.prototype.userBuyCount = function () {
 	return userBuyCount(this);
 };
 
-Wish.prototype.indexedImages = function () {
-	return this.images.map(function(img, i){
-		return { url : img, index : i, active : i === 0? 'active' : ''};
-	})
+Wish.prototype.firstImage= function () {
+	return this.images[0];
 };
 
 Wishes = new Meteor.Collection('wishes', {

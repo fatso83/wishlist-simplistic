@@ -21,32 +21,7 @@
                 {{/unless}}
                 {{/if}}
 
-
-                {{!-- Really wish to move this carousel into its own template,
-                but I don't know how to parameterize the template --}}
-
-
-                <div id="carousel-{{_id}}" class="carousel slide">
-
-                    <ol class="carousel-indicators">
-                        {{#each indexedImages}}
-                        <li data-target="#carousel-{{../_id}}" data-slide-to="{{index}}" class="{{active}}"></li>
-                        {{/each}}
-                    </ol>
-
-                    <!-- Carousel items -->
-                    <div class="carousel-inner">
-                        {{#each indexedImages}}
-                        <div class="item {{active}}">
-                            <img src="{{url}}" alt/>
-                        </div>
-                        {{/each}}
-                    </div>
-
-                    <!-- Carousel nav -->
-                    <a class="carousel-control left" href="#carousel-{{_id}}" data-slide="prev">&lsaquo;</a>
-                    <a class="carousel-control right" href="#carousel-{{_id}}" data-slide="next">&rsaquo;</a>
-                </div>
+                <img class="product-img" src="{{firstImage}}" alt/>
 
                 <div class="action-info">
 
@@ -55,13 +30,10 @@
                         <ul>
                             <li><a href="{{url}}">Lenke til produktside</a></li>
                             <li>Prissjikt: {{price}} kr</li>
-                            <li class="items-left">
-                                <span>Antall gjenværende</span>
-                                <span>{{remaining}}</span>
-                            </li>
                             <li class="items-wanted">
                                 <span>Antall ønsket totalt</span>
                                 <span>{{amount_wanted}}</span>
+                                <span class="total">(totalt {{totalBought}} kjøpt)</span>
                             </li>
                         </ul>
 
@@ -72,6 +44,7 @@
                     </div>
 
 
+                    {{#unless completed }}
                     <div class="action-panel">
                         <div data-wish-id={{_id}} class="count items-bought">
                             <span class="text">Jeg har kjøpt</span>
@@ -80,6 +53,13 @@
                             <a href="#" class="glyphicon glyphicon-minus-sign"></a>
                         </div>
                     </div>
+                    {{/unless}}
+
+                    {{#if userBuyCount}}
+                    <button type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        Angre kjøp</button>
+                    {{/if}}
 
                     {{#if alertMessage}}
                     {{> alert}}
@@ -93,9 +73,9 @@
 </template>
 
 <template name="alert">
-        <div class="alert alert-{{alertLevel}} alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert"><span
-                    aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            {{alertMessage}}
-        </div>
+    <div class="alert alert-{{alertLevel}} alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span
+                aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        {{alertMessage}}
+    </div>
 </template>
