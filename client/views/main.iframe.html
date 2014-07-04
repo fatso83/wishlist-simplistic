@@ -3,12 +3,14 @@
 <script>
     // notify the parent window of your size
     // must have listener on the other window
-    setTimeout(function () {
+    var code = function () {
 
         var targetDomain = '*'; // all
         var height = document.body.scrollHeight;
 
         parent.postMessage({ height : height}, targetDomain)
-    }, 500);
+    };
+    code();
+    setInterval(code, 500);
 </script>
 </body>
