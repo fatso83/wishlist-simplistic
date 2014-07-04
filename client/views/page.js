@@ -52,8 +52,8 @@ function alert(msg, level) {
 		Session.set('alertLevel', level);
 		setTimeout(function(){
 			Session.set('alertMessage', null);
-		}, 2500)
-	}, 200);
+		}, 1500)
+	}, 50);
 
 }
 
