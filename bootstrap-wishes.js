@@ -201,5 +201,5 @@ createWishList = function () {
 	});
 
 	// update any wishes we know of
-	buy(ids[0]); // kenwood er kjøpt
+	buy(ids[0],1); // kenwood er kjøpt
 };
