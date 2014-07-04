@@ -191,7 +191,115 @@ createWishList = function () {
 			],
 			url           : 'http://www.lecreuset.no/Mini-gryte-i-stentoy-no.aspx',
 			amount_wanted : 6
-		}
+		},
+
+
+		{
+			title         : 'Moomin tallerken',
+			description   : [
+				'Moomin tallerken (Arabia). Sammen, blå. 22 cm'
+			].join(" "),
+			price         : 300,
+			images        : [
+				'http://www.ting.no/content/mma/products/00/34/3405/gwi2000x2000/48005_1_mumi_tallerken.jpg'
+			],
+			url           :  	'http://www.ting.no/mummi-tallerken-sammen',
+			amount_wanted : 1
+		},
+
+
+
+		{
+			title         : 'Moomin tallerken',
+			description   : [
+				'Moomin tallerken (Arabia). På sprang. 22 cm'
+			].join(" "),
+			price         : 300,
+			images        : [
+				'http://www.ting.no/content/mma/products/00/34/3422/gwi2000x2000/48006_1_mumi_tallerken.jpg'
+			],
+			url           : 'http://www.ting.no/mummi-tallerken-pa-sprang',
+			amount_wanted : 1
+		},
+
+
+		{
+			title         : 'Kakeboks',
+			description   : [
+				'Mumin Fest kakeboks. 2,2 liter.',
+			].join(" "),
+			price         : 450,
+			images        : [
+				'http://www.scandinaviandesigncenter.no/ProductImages/Arabia/14302/01/338x338/01.jpg',
+			],
+			url           : 'http://www.scandinaviandesigncenter.no/Products/nok1/Trademark/moomin/14302/Mumin+Fest+kakeboks+',
+			amount_wanted : 1
+		},
+
+
+
+		{
+			title         : 'Middagstallerken',
+			description   : [
+				'Royal Copenhagen. Mussel Mega (blå). 27 cm'
+			].join(" "),
+			price         : 650,
+			images        : [
+				'http://www.royalcopenhagen.com/components/com_virtuemart/shop_image/product/2382627_Dinner_plate_27_cm____2_524d718ed810c.png'
+			],
+			url           : 'http://www.royalcopenhagen.com/da/butik/details/1/stel/5/blue-fluted-mega/145/dinner-plate-27-cm---2',
+			amount_wanted : 12
+		},
+
+
+		{
+			title         : 'Riedel vinglass',
+			description   : [
+				'Riedel, Vinum Chianti Classico Riesling',
+				'Kombinasjonsglass som kan brukes både til rød og hvitvin. ',
+				'Fås som enkeltglass eller som {{{<a href=',
+				'"https://www.flust.no/kjoekken/servise-og-glass/vinglass/riedel-vinum-chianti-classico-riesling-grand-cru-4pk-741654/',
+				'}}}flerpakning</a>.'
+			].join(" "),
+			price         : 200,
+			images        : [
+				'https://www.kitchn.no/getfile.ashx?id=16177&type=.jpg',
+			],
+			url           : 'https://www.kitchn.no/nettbutikk/dekketoy/glass-krus/hvitvinsglass/416/15/',
+			amount_wanted : 12
+		},
+
+
+		{
+			title         : 'Tagliatelle pastaskjærer',
+			description   : [
+				'Kenwood AT971a. Italiensk pastakvern med praktisk rulle i rustfritt stål og bronse.'
+			].join(" "),
+			price         : 1200,
+			images        : [
+				'http://www.netonnet.no/ItemExtraImages/hjem-og-fritid/kjokkenmaskin/tilbehor-kjokkenmaskiner/Kenwood-AT971a(169648)-0.jpg',
+			],
+			url           : 'http://www.netonnet.no/art/hjem-og-fritid/kjokkenmaskin/tilbehor-kjokkenmaskiner/Kenwood-AT971a/169648.3410/',
+			amount_wanted : 1
+		},
+
+		/** Uspesifisert
+		{
+			title         : 'Sauterpane',
+			description   : [
+				'Blir oppdatert'
+			].join(" "),
+			price         : 800,
+			images        : [
+			],
+			amount_wanted : 1
+		},
+
+		 Sengetøy
+		 Kniver
+
+		 */
+
 
 	];
 
@@ -201,5 +309,5 @@ createWishList = function () {
 	});
 
 	// update any wishes we know of
-	buy(ids[0],1); // kenwood er kjøpt
+	buy({ id : ids[0] , amount : 1}); // kenwood er kjøpt
 };
