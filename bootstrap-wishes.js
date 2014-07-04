@@ -112,7 +112,7 @@ createWishList = function () {
 			description   : [
 				'Wilfa Svart kaffekvern WSCG-2'
 			].join(" "),
-			price         : 300,
+			price         : 750,
 			url : 'http://www.elkjop.no/product/hjem-og-husholdning/kaffetilbehor/WSCG2/wilfa-svart-kaffekvern-wscg-2',
 			images        : [
 				'http://www.netonnet.no/ItemImages/hjem-og-fritid/kaffe-og-espresso/kaffekvern/Wilfa-WSCG-2(202352)-Large.jpg'

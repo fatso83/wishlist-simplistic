@@ -4,7 +4,11 @@ Template.wish.events({
 
 		var id = template.data._id;
 		regret(id, function(err) {
-			console.log(err);
+			if(err) {
+				alert('Det oppstod en feil', 'danger');
+			} else {
+				alert('Lagret', 'success');
+			}
 		});
 
 		// avoids a redirect to the top
@@ -18,16 +22,22 @@ Template.wish.events({
 		if(template.data.isMulti()) {
 			var s = $(template.firstNode).find('input').val();
 			amount = parseInt(s, 10);
+
+			console.log('amount', amount)
+
+			if(isNaN(amount) || amount <= 0) {
+				alert('Kan bare lagre positive verdier', 'warning');
+				return;
+			}
 		} else {
 			amount = 1;
 		}
+
 		buy({ id : template.data._id, amount : amount }, function(err) {
 			if(err) {
-				console.log('ERR', err)
+				alert('Det oppstod en feil', 'danger');
 			} else {
-				console.log('OK');
-				template.data.alertMessage = 'Endringen er lagret';
-				template.data.alertLevel = 'info';
+				alert('Lagret', 'success');
 			}
 		});
 
@@ -35,6 +45,17 @@ Template.wish.events({
 		return false;
 	}
 });
+
+function alert(msg, level) {
+	setTimeout(function() {
+		Session.set('alertMessage', msg);
+		Session.set('alertLevel', level);
+		setTimeout(function(){
+			Session.set('alertMessage', null);
+		}, 2500)
+	}, 200);
+
+}
 
 Template.page.wishes = function() {
 	return Wishes.find({ },{
@@ -59,6 +80,18 @@ Template.wish.attributes = function() {
 
 Template.wish.disabled = function() {
 	return this.userBuyCount()? "disabled" : '';
+};
+
+Template.wish.alertMessage = function() {
+	return !Session.equals("alertMessage", null);
+}
+
+Template.alert.alertMessage = function(){
+	return Session.get('alertMessage');
+};
+
+Template.alert.alertLevel = function(){
+	return Session.get('alertLevel');
 };
 
 /** only for testing without data

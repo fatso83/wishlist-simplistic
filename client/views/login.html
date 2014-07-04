@@ -4,13 +4,8 @@
         <h1>Hallo, kjære gjest!</h1>
 
         <p>
-            "Hva er dette?", spør du deg kanskje. Det denne
-            lille siden skal være er en garanti for at ingen kjøper
+            Denne siden er en garanti for at ingen kjøper
             samme ting!
-
-            {{!-- Den skal holde rede på hva som er kjøpt av
-            andre og gi en god oversikt over brudeparets ønskeliste.
-            }}
         </p>
         <p>
             Selvsagt er det lov å gi ting som ikke står på ønskelisten!
@@ -18,28 +13,22 @@
             ønsker seg står det her :-)
         </p>
 
-        <p>
-            {{!--
-            For at det skal være mulig å skille mellom brukerne
-            av ønskelisten trenger appen å vite hvem du er.  --}}
+        <ul id="loginbuttons">
+           <li><a id="loginFacebook"
+                  class="btn btn-primary btn-lg"
+                  role="button"><span>f</span>Facebook</a>
+               Har du Facebook? Da kommer du kjappest inn her.
+           </li>
+            <li>
+                <a id="loginPersona"
+                   class="btn btn-primary btn-lg"
+                   role="button">
+                    <img src="/images/persona.png"/>Persona
+                </a>
+                Innlogging for alle andre
 
-            Har du Facebook kan du logge inn ved å trykke på knappen under, og
-            for alle andre er det bare å trykke på Persona-lenken.
-
-            Det hele er over på under minuttet, men det kan være du må innom
-            epostinnboksen din og bekrefte registreringen.
-        </p>
-
-        <p>
-            <a id="loginFacebook"
-               class="btn btn-primary btn-lg"
-               role="button"><span>f</span>Facebook</a>
-            <a id="loginPersona"
-               class="btn btn-primary btn-lg"
-               role="button">
-                <img src="/images/persona.png"/>Persona
-            </a>
-        </p>
+            </li>
+        </ul>
     </div>
 
 </template>
