@@ -90,14 +90,14 @@ dummyØnske = { description : 'et ønske om en god jul', title : 'En riktig god 
 buy = function (options, callback) {
 	Meteor.call('buy', options, function(err) {
 		err && console.log('Fikk ikke lov til å kjøpe', err);
-		callback(err);
+		callback && callback(err);
 	});
 };
 
 regret = function (wishId, callback) {
 	Meteor.call('regret', wishId, function(err){
 		err && console.log('Fikk ikke lov til å fjerne', err);
-		callback(err);
+		callback && callback(err);
 	});
 };
 
@@ -123,8 +123,6 @@ Meteor.methods({
 	buy : function (options) {
 		var wish;
 		var userBuys;
-
-		console.log('called with', arguments)
 
 		if (!this.userId) {
 			throw new Meteor.Error(403, "You must be logged in");
