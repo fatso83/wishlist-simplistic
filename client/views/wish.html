@@ -49,7 +49,7 @@
                         <div class="items-bought">
                             <span class="text">Jeg har kjøpt</span>
                             <input class="count form-control" {{disabled}} {{attributes}}
-                            type="number" step="1" min="0" max="20"/>
+                            type="number" step="1" min="0" max="{{amount_wanted}}"/>
                         </div>
 
                         {{#unless userBuyCount}}
