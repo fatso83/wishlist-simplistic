@@ -10,20 +10,24 @@ Template.wish.events({
 		// avoids a redirect to the top
 		return false;
 	},
-	'click .glyphicon.glyphicon-plus-sign' : function(e, template) {
+	'click button.confirm' : function(e, template) {
 		e.preventDefault();
 
-		var parent = $(e.target).parent();
-		var id = parent.data('wish-id');
-		buy(id, function(err) {
+		var amount;
+
+		if(template.data.isMulti()) {
+			var s = $(template.firstNode).find('input').val();
+			amount = parseInt(s, 10);
+		} else {
+			amount = 1;
+		}
+		buy({ id : template.data._id, amount : amount }, function(err) {
 			if(err) {
 				console.log('ERR', err)
-				template.alertMessage = 'Kan ikke kjøpe flere av denne';
-				template.alertLevel = 'error';
 			} else {
-				console.log('OK')
-				template.alertMessage = 'Endringen er lagret';
-				template.alertLevel = 'info';
+				console.log('OK');
+				template.data.alertMessage = 'Endringen er lagret';
+				template.data.alertLevel = 'info';
 			}
 		});
 
@@ -49,6 +53,13 @@ Template.page.wishes = function() {
 	});
 };
 
+Template.wish.attributes = function() {
+	return {value : this.userBuyCount()}
+};
+
+Template.wish.disabled = function() {
+	return this.userBuyCount()? "disabled" : '';
+};
 
 /** only for testing without data
 Template.page.wishes = function () {

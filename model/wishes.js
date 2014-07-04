@@ -8,8 +8,9 @@ Wish = function (doc) {
 	}
 };
 
+// only mark as completed for single items
 Wish.prototype.completed = function() {
-	return this.remaining() == 0;
+	return this.remaining() <= 0;
 };
 
 Wish.prototype.class_completed = function() {
@@ -66,7 +67,6 @@ Wishes.allow({
 		return userId === wish.owner;
 	},
 	remove : function (userId, wish) {
-		// You can only remove parties that you created and nobody is going to.
 		return wish.owner === userId && totalBought(wish) === 0;
 	}
 });
@@ -82,8 +82,8 @@ Url = Match.Where(function (x) {
 
 dummyØnske = { description : 'et ønske om en god jul', title : 'En riktig god jul', price : 0, images : [], amount_wanted : 1, url : 'http://www.hw.no' };
 
-buy = function (wishId, callback) {
-	Meteor.call('buy_one', wishId, function(err) {
+buy = function (options, callback) {
+	Meteor.call('buy', options, function(err) {
 		err && console.log('Fikk ikke lov til å kjøpe', err);
 		callback(err);
 	});
@@ -115,15 +115,17 @@ regret = function (wishId, callback) {
 //if (Meteor.isServer) {
 Meteor.methods({
 
-	buy_one : function (wishId) {
+	buy : function (options) {
 		var wish;
 		var userBuys;
+
+		console.log('called with', arguments)
 
 		if (!this.userId) {
 			throw new Meteor.Error(403, "You must be logged in");
 		}
 
-		wish = Wishes.findOne(wishId);
+		wish = Wishes.findOne(options.id);
 		if (!wish) {
 			throw new Meteor.Error(413, "Invalid wish id");
 		}
@@ -131,15 +133,15 @@ Meteor.methods({
 		userBuys = wish.userBuyCount();
 		if (!userBuys) {
 			Wishes.update(
-				{ _id : wishId },
+				{ _id : options.id},
 				{ $push : { 'buys' : {user : this.userId, bought : 0} } }
 			);
 		}
 
 		// increment number of bought items by 1
 		Wishes.update(
-			{ _id : wishId, 'buys.user' : this.userId  },
-			{ $inc : { 'buys.$.bought' : 1}
+			{ _id : options.id, 'buys.user' : this.userId  },
+			{ $set : { 'buys.$.bought' : options.amount}
 			})
 
 	},

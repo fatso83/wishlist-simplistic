@@ -44,26 +44,46 @@
                     </div>
 
 
-                    {{#unless completed }}
                     <div class="action-panel">
-                        <div data-wish-id={{_id}} class="items-bought">
+                        {{#if isMulti}}
+                        <div class="items-bought">
                             <span class="text">Jeg har kjøpt</span>
-                            <input class="count form-control" value="{{userBuyCount}}" type="number" step="1" min="1" max="20"/>
+                            <input class="count form-control" {{disabled}} {{attributes}}
+                            type="number" step="1" min="0" max="20"/>
                         </div>
-                        <button type="button" class="btn btn-success">Bekreft</button>
-                    </div>
-                    {{/unless}}
 
-                    {{#if userBuyCount}}
-                    <button type="button" class="btn btn-danger regret" >
-                        <span class="glyphicon glyphicon-trash"></span>
-                        Angre kjøp</button>
-                    {{/if}}
+                        {{#unless userBuyCount}}
+                        <button type="button" class="confirm btn btn-success">Bekreft</button>
+                        {{else}}
+                        <button type="button" class="btn btn-danger regret">
+                            <span class="glyphicon glyphicon-trash"></span>
+                            Angre kjøp
+                        </button>
+                        {{/unless}}
+
+                        {{else}} {{!-- else multi --}}
+
+                        {{#unless userBuyCount}}
+
+                        {{#unless completed}}
+                        <button type="button" class="confirm btn btn-success">Merk som kjøpt</button>
+                        {{/unless}}
+
+                        {{else}}
+
+                        <button type="button" class="btn btn-danger regret">
+                            <span class="glyphicon glyphicon-trash"></span>
+                            Angre kjøp
+                        </button>
+                        {{/unless }}
+
+                        {{/if}} {{!-- end multi--}}
+
+                    </div>
 
                     {{#if alertMessage}}
                     {{> alert}}
                     {{/if}}
-
                 </div>
             </div>
         </div>
@@ -78,3 +98,4 @@
         {{alertMessage}}
     </div>
 </template>
+
