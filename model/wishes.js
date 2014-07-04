@@ -13,6 +13,11 @@ Wish.prototype.completed = function() {
 	return this.remaining() <= 0;
 };
 
+Wish.prototype.tooMany= function() {
+	return this.remaining() < 0;
+};
+
+
 Wish.prototype.class_completed = function() {
 	return this.completed()? 'wish-completed' : '';
 };
