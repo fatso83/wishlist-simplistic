@@ -46,17 +46,16 @@
 
                     {{#unless completed }}
                     <div class="action-panel">
-                        <div data-wish-id={{_id}} class="count items-bought">
+                        <div data-wish-id={{_id}} class="items-bought">
                             <span class="text">Jeg har kjøpt</span>
-                            <span class="count">{{userBuyCount}}</span>
-                            <a href="#" class="glyphicon glyphicon-plus-sign"></a>
-                            <a href="#" class="glyphicon glyphicon-minus-sign"></a>
+                            <input class="count form-control" value="{{userBuyCount}}" type="number" step="1" min="1" max="20"/>
                         </div>
+                        <button type="button" class="btn btn-success">Bekreft</button>
                     </div>
                     {{/unless}}
 
                     {{#if userBuyCount}}
-                    <button type="button" class="btn btn-danger">
+                    <button type="button" class="btn btn-danger regret" >
                         <span class="glyphicon glyphicon-trash"></span>
                         Angre kjøp</button>
                     {{/if}}

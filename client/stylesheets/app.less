@@ -61,9 +61,9 @@ body {
 }
 
 #accordion {
-  padding   : 0 20px;
-//  max-width : 800px;
-  list-style: none;
+  padding    : 0 20px;
+  //  max-width : 800px;
+  list-style : none;
 }
 
 // description part
@@ -77,7 +77,7 @@ body {
     text-decoration : none;
   }
 
-  .product-img{
+  .product-img {
     float  : left;
     margin : 6px 25px 0px 0px;
     width  : 200px;
@@ -95,35 +95,41 @@ body {
 
   // no change in height when clicking away alerts
   .alerts {
-//    height        : 52px;
+    //    height        : 52px;
   }
 
   .items-bought {
-//    padding-bottom : 20px;
-  }
+    font-size: 21px;
+    float   : left;
+    padding: 0 20px 10px 0;
 
-  .count {
-    font-size : 24px;
+    .text {
+      display : inline-block;
+      float   : left;
+    }
+
+    .count {
+      position: relative;
+      left: 5px;
+      top: -5px;
+      width     : 62px;
+      font-size : 21px;
+      height    : 42px;
+    }
   }
 
   .action-panel {
     padding : 10px 0;
 
-    .glyphicon {
-      color : @symbolColor;
-
-      &.active, &.inactive { color : grey; }
-
-      // light up on hover and click
-      &:hover { color : lighten(@symbolColor, 30%); }
-      &:active { color : lighten(@symbolColor, 60%); }
+    button {
+      float : left;
     }
   }
 }
 
 @media only screen
 and (max-width : 600px) {
-  .wish .carousel {
+  .wish .product-img {
     float : none;
   }
 }

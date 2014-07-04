@@ -1,9 +1,11 @@
 Template.wish.events({
-	'click .glyphicon.glyphicon-minus-sign' : function(e) {
+	'click button.regret' : function(e, template) {
 		e.preventDefault();
 
-		var id = $(e.target).parent().data('wish-id');
-		regret(id);
+		var id = template.data._id;
+		regret(id, function(err) {
+			console.log(err);
+		});
 
 		// avoids a redirect to the top
 		return false;

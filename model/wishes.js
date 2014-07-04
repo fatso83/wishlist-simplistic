@@ -36,6 +36,10 @@ Wish.prototype.userBuyCount = function () {
 	return userBuyCount(this);
 };
 
+Wish.prototype.isMulti = function () {
+	return this.amount_wanted > 1;
+};
+
 Wish.prototype.firstImage= function () {
 	return this.images[0];
 };
@@ -86,7 +90,7 @@ buy = function (wishId, callback) {
 };
 
 regret = function (wishId, callback) {
-	Meteor.call('regret_one', wishId, function(err){
+	Meteor.call('regret', wishId, function(err){
 		err && console.log('Fikk ikke lov til å fjerne', err);
 		callback(err);
 	});
@@ -124,10 +128,6 @@ Meteor.methods({
 			throw new Meteor.Error(413, "Invalid wish id");
 		}
 
-		if ((wish.remaining() - 1) < 0) {
-			throw new Meteor.Error(413, "More bought than available");
-		}
-
 		userBuys = wish.userBuyCount();
 		if (!userBuys) {
 			Wishes.update(
@@ -144,8 +144,10 @@ Meteor.methods({
 
 	},
 
-	regret_one : function (wishId) {
+	regret : function (wishId) {
 		var wish, boughtByUser;
+
+		console.log('i regret');
 
 		if (!this.userId) {
 			throw new Meteor.Error(403, "You must be logged in");
@@ -156,22 +158,9 @@ Meteor.methods({
 			throw new Meteor.Error(413, "Invalid wish id");
 		}
 
-		boughtByUser = wish.userBuyCount();
-		if (!boughtByUser) {
-			Wishes.update(
-				{ _id : wishId },
-				{ $push : { 'buys' : {user : this.userId, bought : 0} } }
-			);
-		}
-
-		if ((boughtByUser - 1) < 0) {
-			throw new Meteor.Error(413, "Cannot subtract less than zero");
-		}
-
-		// increment number of bought items by 1
 		Wishes.update(
 			{ _id : wishId, 'buys.user' : this.userId  },
-			{ $inc : { 'buys.$.bought' : -1}
+			{ $set: { 'buys.$.bought' : 0}
 			})
 
 	},
