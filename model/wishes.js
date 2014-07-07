@@ -150,9 +150,7 @@ Meteor.methods({
 	},
 
 	regret : function (wishId) {
-		var wish, boughtByUser;
-
-		console.log('i regret');
+		var wish;
 
 		if (!this.userId) {
 			throw new Meteor.Error(403, "You must be logged in");

@@ -67,9 +67,11 @@ Template.wish.events({
 
 	'click li.wish > a' : function (e, template) {
 
+		var id = template.data._id;
+
 		ga('send', {
 				'hitType'       : 'event',          // Required.
-				'eventCategory' : 'confirm',   // Required.
+				'eventCategory' : 'title',   // Required.
 				'eventAction'   : 'click',      // Required.
 				'eventLabel'    : 'li.wish > a',
 				'eventValue'    : id
