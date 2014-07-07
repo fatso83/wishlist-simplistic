@@ -63,7 +63,22 @@ Template.wish.events({
 
 		// avoids a redirect to the top
 		return false;
+	},
+
+	'click li.wish > a' : function (e, template) {
+
+		ga('send', {
+				'hitType'       : 'event',          // Required.
+				'eventCategory' : 'confirm',   // Required.
+				'eventAction'   : 'click',      // Required.
+				'eventLabel'    : 'li.wish > a',
+				'eventValue'    : id
+			},
+			{'page' : '/list' }
+		);
+
 	}
+
 });
 
 function alert (msg, level) {
