@@ -8,8 +8,7 @@ Template.wish.events({
 				'hitType'       : 'event',          // Required.
 				'eventCategory' : 'regret',   // Required.
 				'eventAction'   : 'click',      // Required.
-				'eventLabel'    : 'button.regret',
-				'eventValue'    : id
+				'eventLabel'    : id + ' button.regret'
 			},
 			{'page' : '/list' }
 		);
@@ -47,8 +46,7 @@ Template.wish.events({
 				'hitType'       : 'event',          // Required.
 				'eventCategory' : 'confirm',   // Required.
 				'eventAction'   : 'click',      // Required.
-				'eventLabel'    : 'button.confirm',
-				'eventValue'    : id
+				'eventLabel'    : id + ' button.confirm'
 			},
 			{'page' : '/list' }
 		);
@@ -73,12 +71,10 @@ Template.wish.events({
 				'hitType'       : 'event',          // Required.
 				'eventCategory' : 'title',   // Required.
 				'eventAction'   : 'click',      // Required.
-				'eventLabel'    : 'li.wish > a',
-				'eventValue'    : id
+				'eventLabel'    : id + ' li.wish > a'
 			},
 			{'page' : '/list' }
 		);
-
 	}
 
 });
