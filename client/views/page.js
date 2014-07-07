@@ -1,10 +1,21 @@
 Template.wish.events({
-	'click button.regret' : function(e, template) {
+	'click button.regret'  : function (e, template) {
 		e.preventDefault();
 
 		var id = template.data._id;
-		regret(id, function(err) {
-			if(err) {
+
+		ga('send', {
+				'hitType'       : 'event',          // Required.
+				'eventCategory' : 'regret',   // Required.
+				'eventAction'   : 'click',      // Required.
+				'eventLabel'    : 'button.regret',
+				'eventValue'    : id
+			},
+			{'page' : '/list' }
+		);
+
+		regret(id, function (err) {
+			if (err) {
 				alert('Det oppstod en feil', 'danger');
 			} else {
 				alert('Lagret', 'success');
@@ -14,18 +25,17 @@ Template.wish.events({
 		// avoids a redirect to the top
 		return false;
 	},
-	'click button.confirm' : function(e, template) {
+	'click button.confirm' : function (e, template) {
 		e.preventDefault();
 
+		var id = template.data._id;
 		var amount;
 
-		if(template.data.isMulti()) {
+		if (template.data.isMulti()) {
 			var s = $(template.firstNode).find('input').val();
 			amount = parseInt(s, 10);
 
-			console.log('amount', amount)
-
-			if(isNaN(amount) || amount <= 0) {
+			if (isNaN(amount) || amount <= 0) {
 				alert('Kan bare lagre positive verdier', 'warning');
 				return;
 			}
@@ -33,8 +43,18 @@ Template.wish.events({
 			amount = 1;
 		}
 
-		buy({ id : template.data._id, amount : amount }, function(err) {
-			if(err) {
+		ga('send', {
+				'hitType'       : 'event',          // Required.
+				'eventCategory' : 'confirm',   // Required.
+				'eventAction'   : 'click',      // Required.
+				'eventLabel'    : 'button.confirm',
+				'eventValue'    : id
+			},
+			{'page' : '/list' }
+		);
+
+		buy({ id : id, amount : amount }, function (err) {
+			if (err) {
 				alert('Det oppstod en feil', 'danger');
 			} else {
 				alert('Lagret', 'success');
@@ -46,24 +66,27 @@ Template.wish.events({
 	}
 });
 
-function alert(msg, level) {
-	setTimeout(function() {
+function alert (msg, level) {
+	setTimeout(function () {
 		Session.set('alertMessage', msg);
 		Session.set('alertLevel', level);
-		setTimeout(function(){
+		setTimeout(function () {
 			Session.set('alertMessage', null);
 		}, 1500)
 	}, 50);
 
 }
 
-Template.page.wishes = function() {
-	return Wishes.find({ },{
-		sort : [['price','asc'],["title"]],
-		limit: 100,
-		transform : (function() {
+Template.page.wishes = function () {
+	return Wishes.find({ }, {
+		sort      : [
+			['price', 'asc'],
+			["title"]
+		],
+		limit     : 100,
+		transform : (function () {
 			var index = 0;
-			return function(doc) {
+			return function (doc) {
 				var w = new Wish(doc);
 				w.index = index;
 				index++;
@@ -74,28 +97,28 @@ Template.page.wishes = function() {
 	});
 };
 
-Template.wish.attributes = function() {
+Template.wish.attributes = function () {
 	return {value : this.userBuyCount()}
 };
 
-Template.wish.disabled = function() {
-	return this.userBuyCount()? "disabled" : '';
+Template.wish.disabled = function () {
+	return this.userBuyCount() ? "disabled" : '';
 };
 
-Template.wish.alertMessage = function() {
+Template.wish.alertMessage = function () {
 	return !Session.equals("alertMessage", null);
 }
 
-Template.alert.alertMessage = function(){
+Template.alert.alertMessage = function () {
 	return Session.get('alertMessage');
 };
 
-Template.alert.alertLevel = function(){
+Template.alert.alertLevel = function () {
 	return Session.get('alertLevel');
 };
 
 /** only for testing without data
-Template.page.wishes = function () {
+ Template.page.wishes = function () {
 	var ids = [44,22,31,1234];
 
 	return ids.map(function (id, index) {
@@ -113,25 +136,25 @@ Template.page.wishes = function () {
 	});
 };
 
-var title = function () {
+ var title = function () {
 	return getRandomVal([
 		'Kenwood KM0220', 'Mummi tallerken',
 		'Bestemorservice', 'Ny tannbørste'
 	]);
 };
 
-var description = function () {
+ var description = function () {
 	return getRandomVal([
 		'km0220 Titanium tilgjengelig fra Lefdal og Elkjøp',
 		"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS."
 	]);
 };
 
-var price = function () {
+ var price = function () {
 	return 500 + Math.round((Math.random() + 0.1) * 50) * 100;
 };
 
-var images = function () {
+ var images = function () {
 //	return getRandomVal([
 	return [
 		'http://getbootstrap.com/2.3.2/assets/img/bootstrap-mdo-sfmoma-01.jpg',
