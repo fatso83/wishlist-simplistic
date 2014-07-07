@@ -255,17 +255,19 @@ createWishList = function () {
 		{
 			title         : 'Riedel vinglass',
 			description   : [
-				'Riedel, Vinum Chianti Classico Riesling',
-				'Kombinasjonsglass som kan brukes både til rød og hvitvin. ',
-				'Fås som enkeltglass eller som {{{<a href=',
-				'"https://www.flust.no/kjoekken/servise-og-glass/vinglass/riedel-vinum-chianti-classico-riesling-grand-cru-4pk-741654/',
-				'}}}flerpakning</a>.'
+				'Riedel, Vinum Chianti Classico Riesling.',
+				'Anbefalte hvitvinsglass. Fås som <a href="',
+				'https://www.kitchn.no/nettbutikk/dekketoy/glass-krus/hvitvinsglass/416/15/"',
+				'>enkeltglass</a> eller som <a href=',
+				'"https://www.flust.no/kjoekken/servise-og-glass/vinglass/riedel-vinum-chianti-classico-riesling-grand-cru-4pk-741654"',
+				'>flerpakning</a>.'
 			].join(" "),
 			price         : 200,
 			images        : [
 				'https://www.kitchn.no/getfile.ashx?id=16177&type=.jpg',
 			],
-			url           : 'https://www.kitchn.no/nettbutikk/dekketoy/glass-krus/hvitvinsglass/416/15/',
+
+			url           : 'https://www.flust.no/kjoekken/servise-og-glass/vinglass/riedel-vinum-chianti-classico-riesling-grand-cru-4pk-741654/',
 			amount_wanted : 12
 		},
 
