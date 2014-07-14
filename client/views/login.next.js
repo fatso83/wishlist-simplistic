@@ -1,6 +1,6 @@
 Template.login.events({
 
-	'click #loginPersona' : function () {
+	'click #loginPersona' : () =>  {
 		ga('send', {
 				'hitType'       : 'event',          // Required.
 				'eventCategory' : 'login',   // Required.
@@ -10,7 +10,7 @@ Template.login.events({
 			{'page' : '/login'}
 		);
 
-		Meteor.loginWithPersona(function (err) {
+		Meteor.loginWithPersona((err) =>  {
 			if (err) {
 				console.error('error', err);
 				ga('send', {
@@ -35,7 +35,7 @@ Template.login.events({
 		});
 	},
 
-	'click #loginFacebook' : function () {
+	'click #loginFacebook' : () =>  {
 		ga('send', {
 				'hitType'       : 'event',          // Required.
 				'eventCategory' : 'login',   // Required.
@@ -44,7 +44,7 @@ Template.login.events({
 			},
 			{'page' : '/login' }
 		);
-		Meteor.loginWithFacebook(function (err) {
+		Meteor.loginWithFacebook((err) =>  {
 			if (err) {
 				console.error('error facebook', arguments);
 				ga('send', {

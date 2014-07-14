@@ -1,11 +1,11 @@
-Template.header.displayName = function() {
+Template.header.displayName = () =>  {
 	return displayName(Meteor.user());
 };
 
 Template.header.events({
 
-	'click #logoutButton' : function () {
-		Meteor.logout(function (err) {
+	'click #logoutButton' : () =>  {
+		Meteor.logout((err) =>  {
 			if (err) {
 				console.error('error', arguments);
 			}
@@ -16,7 +16,7 @@ Template.header.events({
 	}
 });
 
-displayName = function (user) {
+var displayName = (user) =>  {
 	return user.profile.name || user.profile.email;
 };
 

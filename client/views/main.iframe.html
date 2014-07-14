@@ -5,7 +5,7 @@
     if (features.iframe) {
         // notify the parent window of your size
         // must have listener on the other window
-        var code = () => {
+        var code = function() {
 
             var targetOrigin = '*'; // all
             var height = document.body.scrollHeight;
