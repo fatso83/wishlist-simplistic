@@ -6,14 +6,33 @@
 </head>
 <body>
 <script>
-    function listener(event){
-        var pixels= event.data.height;
+
+    function changeHeightOfFrame (newHeight) {
+        var pixels = newHeight;
         var frame = document.getElementById('wishlist');
-        frame.style.height=pixels+"px";
+        frame.style.height = pixels + "px";
     }
 
+    function openUrl (url) {
+        window.location.assign(url);
+    }
 
-    if (window.addEventListener){
+    function listener (event) {
+        var data = event.data;
+
+        switch (data.topic) {
+            case 'height_changed':
+                changeHeightOfFrame(data.message.height);
+                break;
+            case 'open_url':
+                openUrl(data.message.url);
+                break;
+            default:
+                throw new Error('Not implemented: ' + data.message);
+        }
+    }
+
+    if (window.addEventListener) {
         addEventListener("message", listener, false)
     } else {
         attachEvent("onmessage", listener)
@@ -22,7 +41,7 @@
 
 
 <iframe id='wishlist' src="http://localhost:3000" width="100%" frameborder="0" marginheight="0"
-        marginwidth="0" width="100%" >
+        marginwidth="0" width="100%">
 </iframe>
 
 </body>

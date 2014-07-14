@@ -6,11 +6,7 @@
         // notify the parent window of your size
         // must have listener on the other window
         var code = function() {
-
-            var targetOrigin = '*'; // all
-            var height = document.body.scrollHeight;
-
-            parent.postMessage({ height : height}, targetOrigin)
+            tellParent('height_changed', { height : document.body.scrollHeight});
         };
         code();
         setInterval(code, 500);

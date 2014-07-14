@@ -63,6 +63,7 @@ Template.wish.events({
 		return false;
 	},
 
+	// statistics on clicking the accordion
 	'click li.wish > a' : function (e, template) {
 
 		var id = template.data._id;
@@ -75,6 +76,10 @@ Template.wish.events({
 			},
 			{'page' : '/list' }
 		);
+	},
+
+	'click .product-url' : function(e, template) {
+		return externalUrlClickHandler(e);
 	}
 
 });
