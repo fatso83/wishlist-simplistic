@@ -1,16 +1,19 @@
 <!-- all main.* files are concatenated the last -->
 <body>
 <script>
-    // notify the parent window of your size
-    // must have listener on the other window
-    var code = function () {
 
-        var targetDomain = '*'; // all
-        var height = document.body.scrollHeight;
+    if (features.iframe) {
+        // notify the parent window of your size
+        // must have listener on the other window
+        var code = () => {
 
-        parent.postMessage({ height : height}, targetDomain)
-    };
-    code();
-    setInterval(code, 500);
+            var targetOrigin = '*'; // all
+            var height = document.body.scrollHeight;
+
+            parent.postMessage({ height : height}, targetOrigin)
+        };
+        code();
+        setInterval(code, 500);
+    }
 </script>
 </body>
