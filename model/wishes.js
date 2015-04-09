@@ -10,11 +10,23 @@ Wish = function (doc) {
 
 // only mark as completed for single items
 Wish.prototype.completed = function() {
+    if(this.noUpperBound()) return false;
+
 	return this.remaining() <= 0;
 };
 
 Wish.prototype.tooMany= function() {
+    if(this.noUpperBound()) return false;
+
 	return this.remaining() < 0;
+};
+
+Wish.prototype.priceless = function() {
+    return this.price <= 0;
+};
+
+Wish.prototype.noUpperBound= function() {
+    return this.amount_wanted <= 0;
 };
 
 
@@ -216,6 +228,22 @@ Meteor.methods({
 
 if (Meteor.isClient) {
 
+}
+
+if(Meteor.isServer){
+    Meteor.startup(function() {
+
+        return Meteor.methods({
+
+            removeAllWishes: function() {
+
+                return Wishes.remove({});
+
+            }
+
+        });
+
+    });
 }
 
 // helpers

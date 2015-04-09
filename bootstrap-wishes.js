@@ -311,5 +311,5 @@ createWishList = function () {
 	});
 
 	// update any wishes we know of
-	buy({ id : ids[0] , amount : 1}); // kenwood er kjøpt
+	//buy({ id : ids[0] , amount : 1}); // kenwood er kjøpt
 };

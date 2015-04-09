@@ -6,7 +6,7 @@
             <div class="panel-heading {{class_completed}}">
                 {{#if hasPurchased}}<span class="glyphicon glyphicon-ok"></span>{{/if}}
                 <span class="panel-title"> {{title}} </span>
-                <span class="panel-title-price">(Ca pris {{price}} kr)</span>
+                {{#unless priceless}} <span class="panel-title-price">(Ca pris {{price}} kr)</span>{{/unless}}
             </div>
         </a>
 
@@ -28,13 +28,16 @@
                     <div class="info-box">
 
                         <ul>
-                            <li><a class="product-url" href="{{url}}">Lenke til produktside</a></li>
-                            <li>Prissjikt: {{price}} kr</li>
+                            {{#if url}}<li><a class="product-url" href="{{url}}">Lenke til produktside</a></li>{{/if}}
+                            {{#unless priceless}} <li>Prissjikt: {{price}} kr</li> {{/unless}}
+
+                            {{#unless noUpperBound}}
                             <li class="items-wanted">
                                 <span>Antall ønsket totalt</span>
                                 <span>{{amount_wanted}}</span>
                                 <span class="total">(totalt {{totalBought}} kjøpt)</span>
                             </li>
+                            {{/unless}}
                         </ul>
 
                         <p>
